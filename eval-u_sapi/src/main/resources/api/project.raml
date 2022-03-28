@@ -1,0 +1,58 @@
+#%RAML 1.0
+title: project
+version: "1.0"
+protocols:
+  - HTTP
+/track:
+  post:
+    displayName: create a track
+    description: it will create a new track in system
+    body:
+      application/json:
+        type: !include DataType/track.raml
+        example: !include Example/track.json
+    responses:
+      201:
+        body:
+          application/json:
+            type: !include DataType/track.raml
+            example: !include Example/track.json
+  delete:
+    displayName: delete the track
+    description: delete the track from the system
+    queryParameters:
+      track_id : integer
+    responses:
+      204:
+        body:
+          application/json:
+            example:
+              {
+                "message": "the track is      successfully removed"
+              }
+  put:
+    description: update the track details
+    body:
+      application/json:
+        type: !include DataType/track.raml
+        example: !include Example/track.json
+    responses:
+      200:
+        description: sucessfully updated
+        body:
+          application/json:
+            example:
+              {
+                "message":details of successfully updated
+              }
+  get:
+    description: get track details
+    queryParameters:
+      track_id : integer
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include DataType/track.raml
+            example:
+              !include Example/track.json
