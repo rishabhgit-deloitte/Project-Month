@@ -4,7 +4,4 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
-	<flow name="evalFlow" doc:id="1f985f82-b9d7-44f8-8e85-f5ec56efc32c" >
-		<http:listener doc:name="Listener" doc:id="a5866328-4c54-4425-8182-3f8eaadc06e7" />
-	</flow>
 </mule>
