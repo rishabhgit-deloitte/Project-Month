@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="getFeedbacks" doc:id="b94578b0-4782-4954-ba9b-adf154a4805a" >
+		<set-variable value="#[attributes.queryParams.track_id]" doc:name="tracksId" doc:id="b911c199-c4c8-40c2-9fb4-6ca5ac3eed1e" variableName="Track_id"/>
+		<db:select doc:name="fetchLinkersFeedback" doc:id="de13048b-08b6-489e-9c70-1b1fc2bbf722" config-ref="Database_Config">
+			<db:sql ><![CDATA[select linker_id,support,feedback,star from feedback where track_id=:Track_id;]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	Track_id:attributes.queryParams.track_id
+}]]]></db:input-parameters>
+		</db:select>
+		<ee:transform doc:name="Response" doc:id="b29e7514-ee22-4550-a401-d4cdfa9ffbe5">
+			<ee:message>
+				<ee:set-payload resource="dwl/transform.dwl" />
+			</ee:message>
+		</ee:transform>
+	</flow>
+	</mule>

@@ -1,0 +1,32 @@
+#%RAML 1.0
+title: feedback
+version: "1.0"
+protocols:
+  - HTTP
+/feedback:
+  get:
+    queryParameters:
+      track_id:
+        displayName: ID
+        type: number
+        required: true
+    description: details of all the tracks
+    responses:
+      200:
+        body:
+          application/json:
+            type: !include DataType/feedback.raml
+            example: !include Example/feedback.json
+  post:
+    displayName: insert the track details here
+    description: it will add the tracks feedback here
+    body:
+      application/json:
+        type: !include DataType/feedback.raml
+        example: !include Example/feedback.json
+    responses:
+      201:
+        body:
+          application/json:
+            type: !include DataType/feedback.raml
+            example: !include Example/feedback.json

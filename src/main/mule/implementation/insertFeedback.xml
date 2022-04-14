@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="insertFeedback" doc:id="7354bdd2-3cec-4ece-923b-bda42d4f49d0" >
+		<db:insert doc:name="insertLinkersFeedback" doc:id="ae575346-42bc-4346-9622-a4049c344796" config-ref="Database_Config">
+			<db:sql ><![CDATA[insert into feedback (track_id,linker_id,feedback,support,star) values (:track_id,:linker_id,:feedback,:support,:star);]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	track_id:payload.track_id,
+	linker_id: payload.linker_id,
+	feedback: payload.feedback,
+	support:payload.support,
+	star: payload.star
+}]]]></db:input-parameters>
+		</db:insert>
+		<ee:transform doc:name="Response" doc:id="8f6db904-b32b-40fa-88fc-0da0583c0425" >
+			<ee:message >
+				<ee:set-payload resource="dwl/insert.dwl" />
+			</ee:message>
+		</ee:transform>
+	</flow>
+	</mule>
